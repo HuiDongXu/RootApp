@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js继承</title>
+</head>
+<body>
+    <script>
+        //原型链继承，构造函数继承，组合继承
+       
+       
+        //原型链继承  
+        
+        //可以使用父方法的属性  ，但是不囊传参
+       
+        function Fu(name,age){
+            this.name=name;
+            this.age = age;
+        }
+        Fu.prototype.eat = function(){
+            console.log('111')
+        }
+
+        function Zi(ages){
+            this.ages = ages
+        }
+
+        Zi.prototype = new Fu('张豪','28')
+
+        let zi =new Zi(18);
+        console.log(zi.name)
+
+
+        //构造函数继承
+        
+        //可以传递函数，但不能使用父函数中的属性
+            function Gou(name='尼古拉斯·豪',sex='人妖'){
+                this.name = name;
+                this.sex = sex ;
+
+            }
+            Gou.prototype.age = 18
+            function Son(){
+                //改变this的指向,当前对象代替父对象
+                // Gou.call(this)
+                Gou.apply(this,['刘德华'])
+            }
+            let son = new Son();
+            console.log(son)
+            console.log(son.age) //无法使用复函数原型中的属性
+
+
+        //组合继承
+
+        //既可以使用复函数中的属性和方法，可以传递参数
+        //缺点  会调用两次
+        function Pu(name='尼古拉斯·豪',sex='人妖'){
+            this.name = name;
+            this.sex = sex ;
+
+        }
+        Pu.prototype.age = 18
+
+        function Sons(){
+            this.hone = '中国'
+        }
+        Sons.prototype = new Pu()
+        let sons = new Sons();
+        console.log(sons)
+        console.log(sons.age) //可以使用原型中的方法
+
+    </script>
+</body>
+</html>

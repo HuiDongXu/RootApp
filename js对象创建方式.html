@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js对象创建</title>
+</head>
+<body>
+    <script>
+        //1.自面量
+            let object={
+                name:'尼古拉斯·张豪',
+                sty: function(){
+                    console.log('我是'+ this.name);
+                }
+            }
+            console.log(object);
+            // console.log(object.sty );
+
+        //2.实例化
+            let object1 = new Object();
+            object1.name = '尼古拉斯·李帅'
+
+            object.sty1=function(){
+                console.log('我是尼古拉斯·李帅' )
+            }
+            console.log(object1)
+
+        //3.工厂模式
+            function cnp(name,run,cpu){
+                var object2 = new Object();
+                object2.name = name;
+                object2.run = run;
+                object2.cpi = cpu;
+                return object2
+            }
+            let obj1 = cnp('尼古拉斯·金宝光','13','8核')
+            console.log(obj1)
+            let obj2 = cnp('尼古拉斯·金宝光','13','8核')
+            console.log(obj2)
+            console.log(obj1 == obj2 )
+
+        //4.构造函数
+            function car(){
+                this.name = '尼古拉斯·伟'
+                this.pl = '1T'
+            }    
+            let o1 = new car()
+            console.log(o1)
+            let o2 = new car()
+            console.log(o2)
+            console.log(o1 == o2)
+    </script>
+</body>
+</html>
