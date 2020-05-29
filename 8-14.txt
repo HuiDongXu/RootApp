@@ -1,0 +1,199 @@
+## 8.⼤数据可视化技术：可视化技术概述与Echarts⼊⻔
+
+### Echarts特性介绍
+    ECharts，一个纯 Javascript 的图表库，可以流畅的运行在 PC和移动设备上，兼容当前绝大部分浏览器（IE8/9/10/11，Chrome，Firefox，Safari等），底层依赖轻量级的 Canvas 类库 ZRender，提供直观，生动，可交互，可高度个性化定制的数据可视化图表。
+###    9.如何快速上⼿开发⼀个Echarts可视化图表
+ #### 获取 ECharts
+ 
+ 你可以通过以下几种方式获取 ECharts
+ 
+    1. 从 Apache ECharts (incubating) 官网下载界面 获取官方源码包后构建。
+    2. 在 ECharts 的 GitHub 获取。
+    3. 通过 npm 获取 echarts，npm install echarts --save，详见“在 webpack 中使用    echarts”
+    4. 通过 jsDelivr 等 CDN 引入
+#### 引入 ECharts
+通过标签方式直接引入构建好的 echarts 文件
+      <!DOCTYPE html>
+   > <html>
+    <head>
+     <meta charset="utf-8">
+     <!-- 引入 ECharts 文件 -->
+     <script src="echarts.min.js"></script>
+    </head>
+    </html> 
+
+#### 绘制一个简单的图表
+在绘图前我们需要为 ECharts 准备一个具备高宽的 DOM 容器。
+> <body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+</body>
+
+然后就可以通过 echarts.init 方法初始化一个 echarts 实例并通过 setOption 方法生成一个简单的柱状图，下面是完整代码。
+> <!DOCTYPE html>
+    <html>
+    <head>
+     <meta charset="utf-8">
+     <title>ECharts</title>
+     <!-- 引入 echarts.js -->
+     <script src="echarts.min.js"></script>
+    </head>
+    <body>
+      <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+     <div id="main" style="width: 600px;height:400px;"></div>
+      <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+         var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+    </body>
+    </html>
+    
+### 10.如何阅读Echarts官⽅⽂档
+
+#### 在官方文档：https://echarts.baidu.com/echarts2/doc/doc.html#categories
+
+### 简介
+
+ECharts，缩写来自Enterprise Charts，商业级数据图表，一个纯Javascript的图表库，可以流畅的运行在PC和移动设备上，兼容当前绝大部分浏览器（IE6/7/8/9/10/11，chrome，firefox，Safari等），底层依赖轻量级的Canvas类库ZRender，提供直观，生动，可交互，可高度个性化定制的数据可视化图表。创新的拖拽重计算、数据视图、值域漫游等特性大大增强了用户体验，赋予了用户对数据进行挖掘、整合的能力。
+
+支持折线图（区域图）、柱状图（条状图）、散点图（气泡图）、K线图、饼图（环形图）、雷达图（填充雷达图）、和弦图、力导向布局图、地图、仪表盘、漏斗图、事件河流图等12类图表，同时提供标题，详情气泡、图例、值域、数据区域、时间轴、工具箱等7个可交互组件，支持多图表、组件的联动和混搭展现。
+
+
+### 11.Echarts学习必备基础知识
+
+#### 一 接口
+    echarts(enterprise charts 图标库)
+
+#### 二图类
+
+    Bar：柱状图
+    line：折线图
+    Scatter：散点图
+    K：K线图
+    Pie：饼图
+    Radar：雷达图
+    Force：力导布局图
+#### 三 组件
+    Axis：坐标轴     Grid：网络     Polar：极坐标       Title：标题         Tooltip：提示      Legend：图例      data：值
+    
+#### 四 基础库
+
+    zrender(canvas类库)
+    
+### 12.Echarts3.x与Echarts2.x的区别
+
+echarts是百度推出的一个简单实用的图表控件，就个人看来，echarts2的大部分图表代码的可用性和美观性更好，相对而言，echarts3也有很多改进的地方，例如模块导入等和图标选项优化等，本人近期主要在用echarts做地图开发，就一些个人心得总结如下：
+
+1、js文件：
+  首先是js文件，echarts3做了很大的优化，在echarts2中，对各种控件的类库管理的较为详细，有专门的目录结构来存放相关的js文件及相关资源，但是在引入文件的时候往往会很不方便，可能会一不小心就漏掉一个文件，而echarts3可以根据需要在下载项下直接根据所需的功能构架类库，使用时只要导入一个echarts.min.js文件就可以。
+
+2、文件导入：
+  在echarts2中，require是作为模块化加载的入口，在使用过程中关于路径配置经常会出现问题，特别是制作地图的时候，而在echarts3中只需要在开头加一句
+
+    > <script src="js/echarts.js"></script>
+  接下去只要调用接口就可以了。
+3、离线地图：
+  echarts2中离线地图的精确度存在很大的问题，特别是下钻到区县一级，边界线存在模糊、交叉、空白等问题，并且经常出现飞地，与实际地图出入较大，个人认为基本没什么用，在echarts3中对此做了很大的改进，基本解决了以上问题，市与市之间、区县与区县之间基本上不存在衔接问题。
+
+  另外，在echarts3中可以根据需要自主构建地图，这个服务给实际使用提供了很大的便利。
+
+4、工具栏：
+  在echarts3的toolbox里面把辅助线功能取消掉了，图标变小了，总体上感觉echarts3里面的toolbox更丑了。
+
+5、地图漫游工具：
+  在echarts3里面把地图漫游工具取消掉了，说实话，echarts2里面的地图漫游工具看着还是挺不错的，虽然并没有什么用。
+
+6、坐标系:
+  echarts3中，数据结构进行了统一化抽象，最常用的数据结构有：线性表、树、图。例如，线性表以及树、图的节点列表的结构可以归一化为这样的二维数组：
+
+
+
+  echarts3中另一个重要的数据结构抽象是独立出了“坐标系”概念。事实上在 ECharts 2 中已经有grid、polar配置项存在，但是并不是按一个“坐标系”的理解去实现的。echarts3中，支持了直角坐标系（catesian，兼容 echarts2中的grid）、极坐标系（polar）、地理坐标系（geo）。
+
+7、Option变动：
+  1）组件位置想x、y等变成了left、top,可以使用像素和百分比，适应性更强。
+
+  2）为了让结构更合理，echarts3中label被移出来和itemStyle平级。
+
+  根据官方说法，在echarts3中以前的用法也是兼容的，只是不推荐。
+
+
+### 13.Echarts基础架构与常⻅名词术语
+#### 一 基本名词
+
+![](https://user-gold-cdn.xitu.io/2020/5/27/17256211390617d1?w=997&h=438&f=png&s=44105)
+
+![](https://user-gold-cdn.xitu.io/2020/5/27/1725621964ba1f70?w=977&h=559&f=png&s=68041)
+
+### 14.Echarts标准开发模板
+    > <!DOCTYPE html>
+    <html lang="en">
+    <head>
+     <meta charset="UTF-8">
+     <title>Echarts图表</title>
+     <script src="../js/echarts.min.js"></script>
+    </head>
+    <body>
+        <div id="main" style="width:600px;height:400px;"></div>
+    </body>
+    </html>
+    <script>
+    var myChart=echarts.init(document.getElementById('main'))
+    var option={
+        legend:{
+            padding:10,
+            itemGap:10,//图例间隔
+            data:['邓艳波','杨国娥']//legend的data值要和series的对象的每个name 值相对应，不然不出来lenend
+        },
+        tooltip:{//悬浮的时候提示框
+            trigger:'item'//触发方式
+        },
+        xAxis:{
+            type:'category',//什么类型的，比如数值？
+            data:['周一','周二','周三','周四','周五','周六','周日']
+        },
+        yAxis:{
+          type:'value',
+            boundaryGap:[0.1,0.1],//类目起始和结束两端空白策略，见下图，默认为true留空，false则顶头
+            splitNumber:4,//数值的分割段数，不指定的时候根据最大值最小值进行划分
+
+        },
+        series:[
+            {
+                name:'邓艳波',//系列名如启用legend，该值将被legend.data索引相关
+                type:'line',//折线图
+                data:[112,23,45,56,233,343,454,89,343,123,45,76]
+            },
+            {
+                name:'杨国娥',//系列名
+                type:'line',//折线图
+                data:[54,543,23,322,33,63,111,222,23]
+            }
+        ]
+
+    }
+    myChart.setOption(option)
+</script>
+
+
+
+    
